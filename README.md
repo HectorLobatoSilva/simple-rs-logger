@@ -25,29 +25,26 @@ The logger functions uses rest parameters so you can set any number of parameter
 
 ## Usage
 
-```js
-/// Common JS
-const Logger = require("@hectorlobatosilva/simple-logger");
-/// Module JS
-import Logger from "@hectorlobatosilva/simple-logger";
-const logger = new Logger("INFO"); // Logs levels [ "TRACE","DEBUG","INFO","WARN","ERROR" ] OFF by default
-logger.trace("Some", "undefined", "number", "of", "parameters");
-logger.debug("Some", "undefined", "number", "of", "parameters");
-logger.info("Some", "undefined", "number", "of", "parameters");
-logger.warn("Some", "undefined", "number", "of", "parameters");
-logger.error("Some", "undefined", "number", "of", "parameters");
+```toml
+[dependencies]
+logger = "0.1.0"
+```
 
+```rs
+/// main.rs
+use logger::{Levels, Logger};
+
+fn main() {
+    let logger = Logger::new(Levels::INFO); // Only INFO, WARN and ERROR log are alowed to print
+    // Different ways to set string inside a vector
+    logger.info(vec![
+        String::from("Some"),
+        "data: ".to_string(),
+        format!("{}", 45),
+    ])
+}
 // Output with INFO level
-// [ INFO  ]  Some undefined number of parameters
-// [ WARN  ]  Some undefined number of parameters
-// [ ERROR ]  Some undefined number of parameters
-
-/// Output with TRACE level
-// [ TRACE ]  Some undefined number of parameters
-// [ DEBUG ]  Some undefined number of parameters
-// [ INFO  ]  Some undefined number of parameters
-// [ WARN  ]  Some undefined number of parameters
-// [ ERROR ]  Some undefined number of parameters
+// [ INFO ] Some data 45
 ```
 
 ## License
